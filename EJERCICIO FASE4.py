@@ -23,7 +23,7 @@ class Servicio(ABC):
         # No se implementa aquí porque cada servicio tendrá su propio cálculo
         pass
 
-# ETAPA 2: CLASE CLIENTE
+#CLASE CLIENTE
 
 
 # Se define la clase Cliente
@@ -38,7 +38,7 @@ class Cliente:
             # Validación: si el nombre está vacío
             if not nombre:
                 # Se lanza un error personalizado
-                raise ValueError("El nombre no puede estar vacío")
+                raise ValueError("nombre.....")
 
             # Validación: si el correo no contiene '@'
             if "@" not in correo:
@@ -66,9 +66,9 @@ class Cliente:
         return self.__correo
 
 
-# ================================
+
 # PRUEBA BÁSICA (OPCIONAL)
-# ================================
+
 
 # Se ejecuta solo si este archivo es el principal
 if __name__ == "__main__":
