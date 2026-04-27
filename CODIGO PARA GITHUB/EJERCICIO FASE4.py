@@ -1,86 +1,142 @@
-# IMPORTACIÓN Y CLASE ABSTRACTA
 
-# Se importa ABC y abstractmethod desde el módulo abc
-# ABC permite crear clases abstractas
-# abstractmethod permite definir métodos obligatorios
+# IMPORTACIONES
+# Importa herramientas para crear clases abstractas
 from abc import ABC, abstractmethod
 
+# EXCEPCIÓN PERSONALIZADA
+# Se crea una clase de error propia del sistema
+class ErrorSistema(Exception):
+    pass  # No hace nada, solo sirve como tipo de error
 
-# Se define la clase abstracta Servicio
-# Hereda de ABC para indicar que es una clase abstracta
+
+# CLASE ABSTRACTA SERVICIO
+# Clase abstracta (no se puede usar directamente)
 class Servicio(ABC):
 
-    # Constructor de la clase Servicio
-    # Recibe el nombre del servicio
+    # Constructor que recibe el nombre del servicio
     def __init__(self, nombre):
-        # Se guarda el nombre del servicio en el objeto
-        self.nombre = nombre
+        self.nombre = nombre  # Guarda el nombre
 
-    # Se define un método abstracto
-    # Esto obliga a que las clases hijas lo implementen
+    # Método abstracto (obligatorio en las clases hijas)
     @abstractmethod
     def calcular_costo(self):
-        # No se implementa aquí porque cada servicio tendrá su propio cálculo
-        pass
-
-# ETAPA 2: CLASE CLIENTE
+        pass  # No se implementa aquí
 
 
-# Se define la clase Cliente
+# CLASE CLIENTE
+
 class Cliente:
 
-    # Constructor de la clase Cliente
-    # Recibe nombre y correo
+    # Constructor con nombre y correo
     def __init__(self, nombre, correo):
 
-        # Bloque try para manejar errores sin que el programa se detenga
-        try:
-            # Validación: si el nombre está vacío
-            if not nombre:
-                # Se lanza un error personalizado
-                raise ValueError("El nombre no puede estar vacío")
+        # Validación: si el nombre está vacío
+        if not nombre:
+            raise ValueError("Nombre vacío")  # Lanza error
 
-            # Validación: si el correo no contiene '@'
-            if "@" not in correo:
-                # Se lanza un error
-                raise ValueError("Correo inválido")
+        # Validación: si el correo no tiene @
+        if "@" not in correo:
+            raise ValueError("Correo inválido")  # Lanza error
 
-            # Encapsulación:
-            # Se usan dos guiones bajos para hacer atributos privados
-            self.__nombre = nombre
-            self.__correo = correo
+        # Encapsulación: atributos privados
+        self.__nombre = nombre
+        self.__correo = correo
 
-        # Captura de errores tipo ValueError
-        except ValueError as e:
-            # Se muestra el error en pantalla
-            print("Error al crear cliente:", e)
-
-    # Método para obtener el nombre (getter)
+    # Método para obtener el nombre
     def get_nombre(self):
-        # Retorna el nombre privado
         return self.__nombre
 
-    # Método para obtener el correo (getter)
-    def get_correo(self):
-        # Retorna el correo privado
-        return self.__correo
+
+# SERVICIOS (HERENCIA Y POLIMORFISMO)
+
+# Servicio de tipo Sala
+class ServicioSala(Servicio):
+
+    # Implementa el método obligatorio
+    def calcular_costo(self):
+        return 100  # Costo fijo
 
 
-# ================================
-# PRUEBA BÁSICA (OPCIONAL)
-# ================================
+# Servicio de tipo Equipo
+class ServicioEquipo(Servicio):
 
-# Se ejecuta solo si este archivo es el principal
-if __name__ == "__main__":
+    def calcular_costo(self):
+        return 200
 
-    # Creación de un cliente válido
-    cliente1 = Cliente("Andres", "andres@gmail.com")
 
-    # Se imprime el nombre del cliente usando el getter
-    print("Cliente creado:", cliente1.get_nombre())
+# Servicio de tipo Asesoría
+class ServicioAsesoria(Servicio):
 
-    # Creación de un cliente con error (nombre vacío)
-    cliente2 = Cliente("", "correo@gmail.com")
+    def calcular_costo(self):
+        return 300
 
-    # Creación de un cliente con error (correo inválido)
-    cliente3 = Cliente("Pedro", "correo_sin_arroba")
+# CLASE RESERVA
+
+
+class Reserva:
+
+    # Constructor recibe cliente y servicio
+    def __init__(self, cliente, servicio):
+        self.cliente = cliente  # Guarda cliente
+        self.servicio = servicio  # Guarda servicio
+        self.estado = "Pendiente"  # Estado inicial
+
+    # Método para confirmar la reserva
+    def confirmar(self):
+
+        # Bloque para manejar errores
+        try:
+            # Llama al método del servicio (polimorfismo)
+            costo = self.servicio.calcular_costo()
+
+            # Cambia el estado
+            self.estado = "Confirmada"
+
+            # Muestra mensaje
+            print(f"Reserva confirmada para {self.cliente.get_nombre()} - Costo: {costo}")
+
+        # Si ocurre error
+        except Exception as e:
+            print("Error en la reserva:", e)
+
+        # Siempre se ejecuta
+        finally:
+            print("Proceso finalizado\n")
+
+
+# FUNCIÓN PRINCIPAL (SIMULACIÓN)
+
+def main():
+
+    print("INICIO DEL SISTEMA\n")
+
+    try:
+        # Cliente correcto
+        c1 = Cliente("Andres", "andres@gmail.com")
+
+        # Crear servicios
+        s1 = ServicioSala("Sala")
+        s2 = ServicioEquipo("Equipo")
+
+        # Crear reservas
+        r1 = Reserva(c1, s1)
+        r1.confirmar()  # Ejecuta
+
+        r2 = Reserva(c1, s2)
+        r2.confirmar()
+
+        # ERROR INTENCIONAL (nombre vacío)
+        c2 = Cliente("", "correo@gmail.com")
+
+    except ValueError as e:
+        print("Error detectado:", e)
+
+    finally:
+        print("FIN DEL SISTEMA")
+
+
+
+# EJECUCIÓN DEL PROGRAMA
+
+# Llama a la función principal
+main()
