@@ -56,7 +56,7 @@ class Reserva:  # Clase principal que une a un Cliente con un Servicio solicitad
             self.estado = "Confirmada"  # Actualiza el estado de la reserva a Confirmada
             mensaje = f"Éxito: Reserva confirmada para {self.cliente.get_nombre()}. Total: ${costo_final}"  # Crea el reporte
             print(mensaje)  # Muestra el resultado positivo en la pantalla del usuario
-            registrar_log("info", mensaje)  # Almacena el reporte exitoso en el archivo de texto
+            registrar_log("info", f"Reserva confirmada exitosamente para {self.cliente.get_nombre()}")  # Almacena el reporte exitoso en el archivo de texto
         finally:  # Se ejecuta SIEMPRE para cerrar el ciclo de atención de la reserva
             print(f"   [Sistema FJ] Finalizó revisión de reserva de {self.cliente.get_nombre()}.")  # Imprime el cierre
 
