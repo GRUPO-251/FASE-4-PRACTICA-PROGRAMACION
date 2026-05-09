@@ -8,7 +8,8 @@ from logs_excepciones import registrar_log, ErrorValidacionDatos, ErrorOperacion
 class ServicioSala(Servicio):  # Clase que hereda de Servicio para representar el alquiler de salas
     def calcular_costo(self, horas, descuento=0.0):  # Implementa su propia forma de cobrar (Polimorfismo)
         subtotal = self.costo_base * horas  # Multiplica el precio base por el tiempo de uso
-        total = subtotal - (subtotal * descuento)  # Aplica la reducción si se otorgó un descuento (Sobrecarga simulada)
+        valor_descuento = subtotal * descuento
+        total = subtotal - valor_descuento  # Aplica la reducción si se otorgó un descuento (Sobrecarga simulada)
         return round(total, 2)  # Devuelve el dinero redondeado a dos decimales
 
 class ServicioEquipo(Servicio):  # Clase para representar el préstamo de proyectores o computadoras
