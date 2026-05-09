@@ -1,0 +1,2 @@
+[2026-05-09 18:33:31] [INFO] --- Inicio de sesión de usuario ---
+[2026-05-09 18:34:49] [INFO] --- Fin de la sesión de usuario ---
