@@ -2,7 +2,8 @@
 from logs_excepciones import registrar_log, ErrorValidacionDatos, ErrorOperacionReserva, ErrorSistemaFJ  # Importa las herramientas de logs y errores
 
 # =====================================================================
-# 5. SERVICIOS ESPECIALIZADOS (Herencia, Polimorfismo y Sobrecarga)
+# 5. SERVICIOS ESPECIALIZADOS
+# Aplicación de Herencia, Polimorfismo y Sobrecarga
 # =====================================================================
 class ServicioSala(Servicio):  # Clase que hereda de Servicio para representar el alquiler de salas
     def calcular_costo(self, horas, descuento=0.0):  # Implementa su propia forma de cobrar (Polimorfismo)
