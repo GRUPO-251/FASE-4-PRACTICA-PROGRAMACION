@@ -1,5 +1,10 @@
  from entidades_clientes import Servicio  # Importa la clase Servicio para aplicar herencia
-from logs_excepciones import registrar_log, ErrorValidacionDatos, ErrorOperacionReserva, ErrorSistemaFJ  # Importa las herramientas de logs y errores
+from logs_excepciones import (
+    registrar_log,
+    ErrorValidacionDatos,
+    ErrorOperacionReserva,
+    ErrorSistemaFJ
+)  # Importa las herramientas de logs y errores
 
 # =====================================================================
 # 5. SERVICIOS ESPECIALIZADOS
