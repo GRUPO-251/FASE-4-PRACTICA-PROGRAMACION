@@ -11,6 +11,7 @@ from logs_excepciones import (
 # =====================================================================
 # 5. SERVICIOS ESPECIALIZADOS
 # Aplicación de Herencia, Polimorfismo y Sobrecarga
+# Se mantienen comentarios descriptivos para evidenciar trazabilidad y aportes individuales en GitHub
 # =====================================================================
 class ServicioSala(Servicio):  # Clase que hereda de Servicio para representar el alquiler de salas
     def calcular_costo(self, horas, descuento=0.0):  # Implementa su propia forma de cobrar (Polimorfismo)
