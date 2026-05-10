@@ -1,4 +1,5 @@
 # Ajuste final de configuracion Git
+# Correccion de configuracion de email Git para asociar commits al usuario Yeison Castillo
 from entidades_clientes import Servicio  # Importa la clase Servicio para aplicar herencia
 from logs_excepciones import (
     registrar_log,
