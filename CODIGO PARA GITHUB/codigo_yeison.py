@@ -1,4 +1,4 @@
- from entidades_clientes import Servicio  # Importa la clase Servicio para aplicar herencia
+from entidades_clientes import Servicio  # Importa la clase Servicio para aplicar herencia
 from logs_excepciones import (
     registrar_log,
     ErrorValidacionDatos,
