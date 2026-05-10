@@ -1,13 +1,20 @@
-from entidades_clientes import Servicio
-from logs_excepciones import registrar_log, ErrorValidacionDatos, ErrorOperacionReserva, ErrorSistemaFJ  # Importa las herramientas de logs y errores
+from entidades_clientes import Servicio  # Importa la clase Servicio para aplicar herencia
+from logs_excepciones import (
+    registrar_log,
+    ErrorValidacionDatos,
+    ErrorOperacionReserva,
+    ErrorSistemaFJ
+)  # Importa las herramientas de logs y errores
 
 # =====================================================================
-# 5. SERVICIOS ESPECIALIZADOS (Herencia, Polimorfismo y Sobrecarga)
+# 5. SERVICIOS ESPECIALIZADOS
+# Aplicación de Herencia, Polimorfismo y Sobrecarga
 # =====================================================================
 class ServicioSala(Servicio):  # Clase que hereda de Servicio para representar el alquiler de salas
     def calcular_costo(self, horas, descuento=0.0):  # Implementa su propia forma de cobrar (Polimorfismo)
         subtotal = self.costo_base * horas  # Multiplica el precio base por el tiempo de uso
-        total = subtotal - (subtotal * descuento)  # Aplica la reducción si se otorgó un descuento (Sobrecarga simulada)
+        valor_descuento = subtotal * descuento
+        total = subtotal - valor_descuento  # Aplica la reducción si se otorgó un descuento (Sobrecarga simulada)
         return round(total, 2)  # Devuelve el dinero redondeado a dos decimales
 
 class ServicioEquipo(Servicio):  # Clase para representar el préstamo de proyectores o computadoras
@@ -54,7 +61,7 @@ class Reserva:  # Clase principal que une a un Cliente con un Servicio solicitad
             self.estado = "Confirmada"  # Actualiza el estado de la reserva a Confirmada
             mensaje = f"Éxito: Reserva confirmada para {self.cliente.get_nombre()}. Total: ${costo_final}"  # Crea el reporte
             print(mensaje)  # Muestra el resultado positivo en la pantalla del usuario
-            registrar_log("info", mensaje)  # Almacena el reporte exitoso en el archivo de texto
+            registrar_log("info", f"Reserva confirmada exitosamente para {self.cliente.get_nombre()}")  # Almacena el reporte exitoso en el archivo de texto
         finally:  # Se ejecuta SIEMPRE para cerrar el ciclo de atención de la reserva
             print(f"   [Sistema FJ] Finalizó revisión de reserva de {self.cliente.get_nombre()}.")  # Imprime el cierre
 
