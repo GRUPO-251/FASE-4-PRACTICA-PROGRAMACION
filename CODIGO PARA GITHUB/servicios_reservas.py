@@ -1,3 +1,4 @@
+# Ajuste final de configuracion Git
 from entidades_clientes import Servicio  # Importa la clase Servicio para aplicar herencia
 from logs_excepciones import (
     registrar_log,
